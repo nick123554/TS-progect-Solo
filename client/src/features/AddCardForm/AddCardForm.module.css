@@ -1,0 +1,43 @@
+/* Контейнер формы */
+.formContainer {
+  max-width: 500px;
+  margin: 200px auto 0;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Поля ввода */
+.input {
+  width: 94%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #7b9acc;
+  box-shadow: 0 0 5px rgba(123, 154, 204, 0.3);
+}
+
+/* Кнопка */
+.button {
+  width: 100%;
+  padding: 12px;
+  background-color: #264b2c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #5c8959;
+}
