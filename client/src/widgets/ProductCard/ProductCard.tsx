@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import  { type JSX } from "react";
 import { useNavigate } from "react-router";
+import type { ProductT } from "../../entities/users/types/ProductTypes";
 
-export default function ProductCard({ el, deleteHandler }) {
-  const [productCard, setProductcard] = useState(el);
+type ProductCardPropsT = {
+  el: ProductT;
+  // deleteHandler: (id:number) => void
+}
+// 
+
+export default function ProductCard({ el }: ProductCardPropsT): JSX.Element {
+  // const [productCard, setProductcard] = useState(el);
   const nav = useNavigate();
   console.log("01----->", el);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     nav(`/products/${el.id}`);
   };
 
-  const handleDelete = (e) => {
-    e.stopPropagation();
-    deleteHandler(el.id);
-  };
+  // const handleDelete = (e) => {
+  //   e.stopPropagation();
+  //   deleteHandler(el.id);
+  // };
 
   return (
     <div
@@ -25,8 +32,8 @@ export default function ProductCard({ el, deleteHandler }) {
         padding: "10px",
       }}
     >
-      <h3>{productCard.title}</h3>
-      <p>{productCard.phone}</p>
+      <h3>{el.title}</h3>
+      <p>{el.phone}</p>
       
       
     </div>

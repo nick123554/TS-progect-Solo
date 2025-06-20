@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { ProductApi } from "../../entities/products/ProductApi";
+import { useState } from "react";
+
 import { useNavigate, useParams } from "react-router";
+import { ProductApi } from "../../entities/products/ProductApi";
 // import EditForm from "../../features/EditForm/EditForm";
 
 export default function OneProductCard({ product, id }) {

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { ProductApi } from "../../entities/products/ProductApi";
+import { useEffect, useState, type JSX } from "react";
+
 import ProductCard from "../../widgets/ProductCard/ProductCard";
+import { ProductApi } from "../../entities/products/ProductApi";
+import type { ProductT } from "../../entities/users/types/ProductTypes";
 
-export default function MainPage() {
-  const [products, setProducts] = useState([]);
+export default function MainPage(): JSX.Element {
+  const [products, setProducts] = useState<ProductT[]>([]);
 
-  async function deleteHandler(id) {
+  async function deleteHandler(id:number): Promise<void> {
     try {
       const data = await ProductApi.delete(id);
       if (data.statusCode === 200) {
@@ -19,7 +21,7 @@ export default function MainPage() {
   }
 
   useEffect(() => {
-    const getProducts = async () => {
+    const getProducts = async (): Promise<void> => {
       try {
         const { data } = await ProductApi.getAll();
         console.log(data);

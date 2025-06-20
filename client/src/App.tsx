@@ -1,14 +1,14 @@
-import React, { useEffect, type JSX } from "react";
+import { useEffect, type JSX } from "react";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { UserApi } from "./entities/users/api/UserApi";
-import type { UserT } from "./entities/users/types/UserTypes";
+import type { UserStateT} from "./entities/users/types/UserTypes";
 import Layout from "./widgets/Layout/Layout";
 // import Layout from "./widgets/Layout/Layout";
 // import MainPage from "./pages/MainPage/MainPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import { axiosInstance, setAccessToken } from "./shared/lib/axiosInstance";
+// import { axiosInstance, setAccessToken } from "./shared/lib/axiosInstance";
 // import { UserApi } from "./entities/users/UserApi";
 import AddProductPage from "./pages/AddProductPage/AddProductPage";
 import MyProductsPage from "./pages/MyProductsPage/MyProductsPage";
@@ -17,10 +17,7 @@ import EditPage from "./pages/EditPage/EditPage";
 import MainPage from "./pages/MainPage/MainPAge";
 // import PersonalPage from "./pages/Personalpage/PersonalPage";
 
-type UserStateT = {
-  status: string,
-  data: UserT | null
-}
+
 
 function App():JSX.Element {
   const [user, setUser] = useState<UserStateT>({ status: "loging", data: null });
@@ -45,9 +42,9 @@ function App():JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout user={user} setUser={setUser} />}>
-          <Route path="/" element={<MainPage user={user} />} />
+          <Route path="/" element={<MainPage />} />
           {/* <Route path="/personal" element={<PersonalPage user={user} />} /> */}
-          <Route path="/add" element={<AddProductPage user={user} />} />
+          <Route path="/add" element={<AddProductPage />} />
           <Route
             path="/products"
             element={<MyProductsPage user={user} />}

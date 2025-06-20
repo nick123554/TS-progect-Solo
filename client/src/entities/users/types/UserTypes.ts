@@ -28,6 +28,11 @@ export type UserT = {
 
 }
 
+export type UserStateT = {
+  status: string,
+  data: UserT | null
+}
+
 export type TokenAndUserT = {
   accessToken: string,
   user: UserT
