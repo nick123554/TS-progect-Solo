@@ -1,7 +1,11 @@
-import React from 'react'
+import { type JSX } from 'react'
 import LogForm from '../../features/LoginForm/LoginForm'
+import type { UserStateT } from '../../entities/users/types/UserTypes'
 
-export default function LoginPage({setUser}) {
+ type LoginPagePropsT = {
+  setUser: (user: UserStateT) => void
+}
+export default function LoginPage({setUser}: LoginPagePropsT):JSX.Element {
   return (
     <>
     <LogForm setUser={setUser}/>

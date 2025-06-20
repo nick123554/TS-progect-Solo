@@ -1,11 +1,17 @@
-import React from "react";
+import { type JSX } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router";
 import Button from "react-bootstrap/Button";
+import type { UserStateT } from "../../entities/users/types/UserTypes";
 
-export default function NavBar({ logautHendler, user }) {
+type NavBarPropsT = {
+  logautHendler: () => void;
+  user: UserStateT;
+};
+
+export default function NavBar({ logautHendler, user }: NavBarPropsT): JSX.Element {
   console.log(user);
 
   return (

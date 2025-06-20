@@ -5,3 +5,8 @@ export type ProductT = {
     authorId: number
 }
 
+
+export type ProductInputsT = {
+    title: string;
+    phone: string;
+}

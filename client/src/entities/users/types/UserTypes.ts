@@ -47,7 +47,7 @@ export type RegisterT = LoginT & {
   name: string,
  }
 
- export type AppUserT = {
-  status: 'Guest' | 'Auth';
-  data: UserT | null;
-};
+//  export type AppUserT = {
+//   status: 'Guest' | 'logged';
+//   data: UserT | null;
+// };

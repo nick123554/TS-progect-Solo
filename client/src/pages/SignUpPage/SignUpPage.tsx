@@ -1,7 +1,12 @@
-import React from 'react'
+import { type JSX } from 'react'
 import RegForm from '../../features/RegForm/RegForm'
+import type { UserStateT } from '../../entities/users/types/UserTypes'
 
-export default function SignUpPage({setUser}) {
+ type SignUpPagePropsT = {
+  setUser: (user: UserStateT) => void
+}
+
+export default function SignUpPage({setUser}:SignUpPagePropsT): JSX.Element {
   return (
     <>
     

@@ -7,13 +7,13 @@ import { Outlet, useNavigate } from 'react-router';
 import { UserApi } from '../../entities/users/api/UserApi';
 import { setAccessToken } from '../../shared/lib/axiosInstance';
 import NavBar from '../NavBar/Navbar';
-import type { AppUserT, UserStateT } from '../../entities/users/types/UserTypes';
+import type { UserStateT } from '../../entities/users/types/UserTypes';
 ;
 
 
 type UserProps = {
   user: UserStateT;
-  setUser: (user: AppUserT) => void;
+  setUser: (user: UserStateT) => void;
 };
 
 // type UserProps = {
