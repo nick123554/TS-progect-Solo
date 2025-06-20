@@ -1,15 +1,30 @@
 import React from 'react'
+// import type { IUser } from '../../entities/users/types/UserTypes';
 import Container from 'react-bootstrap/esm/Container';
-import NavBar from '../NavBar/Navbar';
-import { Outlet, useNavigate } from 'react-router';
-import { axiosInstance, setAccessToken } from '../../shared/lib/axiosInstance';
-import { UserApi } from '../../entities/users/UserApi';
 
-export default function Layout({user, setUser}):React.JSX.Element {
+import { Outlet, useNavigate } from 'react-router';
+
+import { UserApi } from '../../entities/users/api/UserApi';
+import { setAccessToken } from '../../shared/lib/axiosInstance';
+import NavBar from '../NavBar/Navbar';
+import type { AppUserT, UserStateT } from '../../entities/users/types/UserTypes';
+;
+
+
+type UserProps = {
+  user: UserStateT;
+  setUser: (user: AppUserT) => void;
+};
+
+// type UserProps = {
+//     user: IUser;
+//     setUser: (user: IUser) => void
+// }
+export default function Layout({user, setUser}:UserProps):React.JSX.Element { 
     const navigate = useNavigate()
 
    const logautHendler = async ():Promise<void> => {
-    await UserApi.logout("/auth/logout")
+    await UserApi.logout()
       setUser({status: "Guest", data: null})
       setAccessToken('')
       navigate('/')
