@@ -1,4 +1,4 @@
-import React from "react";
+import { type ChangeEvent, type FormEvent, type JSX } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -6,8 +6,9 @@ import { useNavigate } from "react-router";
 
 // import { UserApi } from "../../../../entities/users/UserApi";
 import { UserValidator } from "../../entities/users/model/User.validator";
-import { axiosInstance, setAccessToken } from "../../shared/lib/axiosInstance";
+import { setAccessToken } from "../../shared/lib/axiosInstance";
 import { UserApi } from "../../entities/users/api/UserApi";
+import type { UserStateT } from "../../entities/users/types/UserTypes";
 
 const INITIAL_INPUT_DATA = {
   name: "",
@@ -15,16 +16,21 @@ const INITIAL_INPUT_DATA = {
   password: "",
 };
 
-function RegForm({ setUser }) {
+type RegFormPropsT = {
+  setUser: (user: UserStateT) => void
+}
+
+function RegForm({ setUser }:RegFormPropsT): JSX.Element {
   const [inputs, setInputs] = useState(INITIAL_INPUT_DATA);
 
   const navigate = useNavigate();
 
-  const changeHandler = (event) => {
+  
+  const changeHandler = (event:ChangeEvent<HTMLInputElement>): void => {
     setInputs((pre) => ({ ...pre, [event.target.name]: event.target.value }));
   };
 
-  const sumbitHandler = async (e) => {
+  const sumbitHandler = async (e:FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
       const { isValid, error } = UserValidator.validate(inputs);
@@ -35,13 +41,13 @@ function RegForm({ setUser }) {
         setUser({ status: "logged", data: data.data.user });
 
         if (data.statusCode === 201 && data.data.accessToken) {
-          setUser((pre) => ({ ...pre, ...data.data.user }));
+          setUser({ status: "logged", data: data.data.user });
           // * сохраняем токен на клиенте
           setAccessToken(data.data.accessToken);
           navigate("/");
         } else {
-          console.log("============>>", data.response.data);
-          return alert(data.response.data.error);
+          // 
+          return alert(data.error);
         }
       } else {
         console.log("Ошибка из валидатора", error);
@@ -49,7 +55,7 @@ function RegForm({ setUser }) {
       }
     } catch (error) {
       console.log("~~~~~~>>", error);
-      return alert(error.response.data.error);
+      return alert(error);
     }
   };
 

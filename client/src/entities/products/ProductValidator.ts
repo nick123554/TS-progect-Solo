@@ -1,5 +1,17 @@
+
+
+type ValidationResultT = {
+  isValid: boolean;
+  error: string | null;
+};
+
+type ProductValidationT = {
+  title: string;
+  phone: string;
+}
+
 export default class ProductValidator {
-  static validate(product) {
+  static validate(product: ProductValidationT): ValidationResultT {
     const { title, phone } = product;
     if (!title || typeof title !== "string" || title.trim() === "") {
       return {

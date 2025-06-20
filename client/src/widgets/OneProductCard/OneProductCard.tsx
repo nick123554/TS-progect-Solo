@@ -1,19 +1,25 @@
-import { useState } from "react";
+import {  type JSX } from "react";
 
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { ProductApi } from "../../entities/products/ProductApi";
+import type { ProductT } from "../../entities/users/types/ProductTypes";
 // import EditForm from "../../features/EditForm/EditForm";
 
-export default function OneProductCard({ product, id }) {
-  const nav = useNavigate();
-  const [cards, setCards] = useState([]);
-  console.log(id);
 
-  async function deleteHandler(id) {
+type OneProductCardPropsT = {
+  product: ProductT;
+};
+
+export default function OneProductCard( {product}: OneProductCardPropsT): JSX.Element {
+  const nav = useNavigate();
+  // const [cards, setCards] = useState<ProductT[]>([]);
+  
+
+  async function deleteHandler(id:number): Promise<void> {
     try {
       const data = await ProductApi.delete(id);
       if (data.statusCode === 200) {
-        setCards((card) => card.filter((el) => el.id !== id));
+        // setCards((card) => card.filter((el) => el.id !== id));
         nav("/");
         console.log("0--------------->");
       } else {

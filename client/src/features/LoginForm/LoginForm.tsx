@@ -1,27 +1,32 @@
-import React from "react";
+import { type ChangeEvent, type FormEvent, type JSX } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
 
-import { axiosInstance, setAccessToken } from "../../shared/lib/axiosInstance";
+import { setAccessToken } from "../../shared/lib/axiosInstance";
 import { UserApi } from "../../entities/users/api/UserApi";
+import type { UserStateT } from "../../entities/users/types/UserTypes";
 
 const INITIAL_INPUT_DATA = {
   email: "",
   password: "",
 };
 
-function LogForm({ setUser }) {
+type LogFormPropsT = {
+  setUser: (user: UserStateT)=> void
+}
+
+function LogForm({ setUser }: LogFormPropsT): JSX.Element {
   const [inputs, setInputs] = useState(INITIAL_INPUT_DATA);
 
   const navigate = useNavigate();
 
-  const changeHandler = (event) => {
+  const changeHandler = (event:ChangeEvent<HTMLInputElement>): void => {
     setInputs((pre) => ({ ...pre, [event.target.name]: event.target.value }));
   };
 
-  const sumbitHandler = async (e) => {
+  const sumbitHandler = async (e:FormEvent<HTMLFormElement>):Promise<void> => {
     e.preventDefault();
     try {
       const data = await UserApi.login(inputs);
@@ -30,17 +35,17 @@ function LogForm({ setUser }) {
 
       console.log("LogForm data:", data);
       if (data.statusCode === 200 && data.data.accessToken) {
-        setUser((pre) => ({ ...pre, ...data.data.user }));
+        setUser({ status: "logged", data: data.data.user });
         setAccessToken(data.data.accessToken);
         navigate("/");
       } else {
-        console.log("============>>", data.response.data);
-        return alert(data.response.data.error);
+       
+        return alert(data.error);
       }
       navigate("/");
     } catch (error) {
       console.log(error);
-      return alert(error.response.data.error);
+      return alert(error);
     }
   };
 
