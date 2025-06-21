@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { UserApi } from '../../entities/users/UserApi';
+import  { useEffect, useState, type JSX } from 'react'
+import { UserApi } from '../../entities/users/api/UserApi';
+import type { UserStateT } from '../../entities/users/types/UserTypes';
 
-export default function PersonalPage() {
-    const [user, setUser] = useState({ status: "loging", data: null });
+
+export default function PersonalPage(): JSX.Element {
+    const [user, setUser] = useState<UserStateT>({ status: "loging", data: null });
       console.log(user);
     
       useEffect(() => {
-        const getUser = async () => {
+        const getUser = async (): Promise<void> => {
           try {
             const data = await UserApi.refresh();
             console.log(data);

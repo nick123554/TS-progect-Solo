@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { useParams } from "react-router";
-import { ProductApi } from "../../entities/products/ProductApi";
-import ProductCard from "../../widgets/ProductCard/ProductCard";
-import OneProductCard from "../../widgets/OneProductCard/OneProductCard";
 
-export default function OnePage() {
-  const [product, setProduct] = useState({});
+// import ProductCard from "../../widgets/ProductCard/ProductCard";
+import OneProductCard from "../../widgets/OneProductCard/OneProductCard";
+import { ProductApi } from "../../entities/products/ProductApi";
+import type { ProductT } from "../../entities/users/types/ProductTypes";
+
+
+
+ 
+export default function OnePage(): JSX.Element {
+  const [product, setProduct] = useState<ProductT>({id: 0, title: "", phone: "", authorId: 0});
   // const [editMode, setEditMode] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
-    async function getOneProduct() {
+    async function getOneProduct(): Promise<void> {
       try {
-        const data = await ProductApi.getOne(id);
+        const data = await ProductApi.getOne(Number(id));
         console.log(data);
         if (data.statusCode === 200) {
           setProduct(data.data);
@@ -32,7 +37,7 @@ export default function OnePage() {
 
   return (
     <>
-      <OneProductCard product={product} id={id}/>
+      <OneProductCard product={product} />
     </>
   );
 }

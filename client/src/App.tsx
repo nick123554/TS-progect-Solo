@@ -5,7 +5,7 @@ import { UserApi } from "./entities/users/api/UserApi";
 import type { UserStateT} from "./entities/users/types/UserTypes";
 import Layout from "./widgets/Layout/Layout";
 // import Layout from "./widgets/Layout/Layout";
-// import MainPage from "./pages/MainPage/MainPage";
+
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 // import { axiosInstance, setAccessToken } from "./shared/lib/axiosInstance";
@@ -14,7 +14,9 @@ import AddProductPage from "./pages/AddProductPage/AddProductPage";
 import MyProductsPage from "./pages/MyProductsPage/MyProductsPage";
 import OnePage from "./pages/OnePage/OnePage";
 import EditPage from "./pages/EditPage/EditPage";
-import MainPage from "./pages/MainPage/MainPAge";
+import MainPage from "./pages/MainPage/MainPage";
+
+
 // import PersonalPage from "./pages/Personalpage/PersonalPage";
 
 
@@ -42,7 +44,7 @@ function App():JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout user={user} setUser={setUser} />}>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage/>} />
           {/* <Route path="/personal" element={<PersonalPage user={user} />} /> */}
           <Route path="/add" element={<AddProductPage />} />
           <Route

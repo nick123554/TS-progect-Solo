@@ -13,7 +13,7 @@ export const axiosInstance = axios.create({
 let accessToken = '';
 
 // * используй эту ф-ию там, где ты ожидаешь приход токенов
-export function setAccessToken(token) {
+export function setAccessToken(token: string): void {
   accessToken = token
 }
 
