@@ -33,8 +33,8 @@ export class ProductApi {
   }
 
   
-static async getOneProductsByUser(id:number): Promise<FormatResponseType<ProductT>>  {
-      const { data } = await axiosInstance.get<FormatResponseType<ProductT>>(`/products/by-author/${id}`);
+static async getOneProductsByUser(id:number): Promise<FormatResponseType<ProductT[]>>  {
+      const { data } = await axiosInstance.get<FormatResponseType<ProductT[]>>(`/products/by-author/${id}`);
       return data;
     }
 
